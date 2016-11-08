@@ -1,9 +1,14 @@
 enum-compat==0.0.2
 netifaces==0.10.5
+oauthlib==2.0.0
 protobuf==3.0.0b2
 PyChromecast==0.7.7
+python-dateutil==2.4.2
+pytodoist==2.0.5
 requests==2.11.1
+requests-oauthlib==0.7.0
 six==1.10.0
 slackclient==1.0.2
+-e git+git@github.com:Doist/todoist-python.git@2f8b7106bdb9f543b6bde0022e7045e3bdb2b2bb#egg=todoist_python
 websocket-client==0.37.0
 zeroconf==0.17.6
