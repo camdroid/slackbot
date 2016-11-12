@@ -5,8 +5,6 @@ from config import todoist_inbox_id
 
 
 class Todoist(object):
-    #TODO Figure out how to get this dynamically
-
     def __init__(self):
         self.api = todoist.TodoistAPI(TODOIST_API_KEY)
 
@@ -20,8 +18,16 @@ class Todoist(object):
 
     def list(self):
         self.project = self.get_project()
-        return self.project['items']
+        items = self.project['items']
+        return items[:20]
 
     def parse_commands(self, commands):
         if commands[0] == 'list':
-            return self.list()
+            items = self.list()
+            msgs = [item['content'] for item in items]
+            return msgs
+
+    def format_list(self, list):
+        messages = ['{}) {}'.format(i, l) for i, l in enumerate(list)]
+        msg = '\n'.join(messages)
+        return msg
