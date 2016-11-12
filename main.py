@@ -42,7 +42,7 @@ def handle_command(command, channel):
     if commands[0] == 'todo':
         todo = Todoist()
         results = todo.parse_commands(commands[1:])
-        message = [res['content'] for res in results]
+        message = todo.format_list(results)
     slack_client.api_call('chat.postMessage', channel=channel,
                           text=message, as_user=True)
 
