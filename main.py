@@ -1,7 +1,9 @@
 import os
 from slackclient import SlackClient
 from secrets import SLACKBOT_TOKEN
+from secrets import TODOIST_API_KEY
 import time
+from slackbot_todoist import Todoist
 
 
 BOT_NAME = 'test_bot'
@@ -36,8 +38,13 @@ def parse_slack_output(slack_rtm_output):
 
 def handle_command(command, channel):
     print('Received: \n{}\n in {}'.format(command, channel))
+    commands = [c.lower() for c in command.split(' ')]
+    if commands[0] == 'todo':
+        todo = Todoist()
+        results = todo.parse_commands(commands[1:])
+        message = [res['content'] for res in results]
     slack_client.api_call('chat.postMessage', channel=channel,
-                          text='Hi!', as_user=True)
+                          text=message, as_user=True)
 
 
 def main():
