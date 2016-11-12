@@ -15,6 +15,14 @@ def inbound():
     return Response('hello!'), 200
 
 
+@app.route('/todo', methods=['POST'])
+def get_todo(*args, **kwargs):
+    from slackbot_todoist import Todoist
+    todo = Todoist()
+    results = todo.parse_commands(['list'])
+    message = todo.format_list(results)
+    return Response(message), 200
+
 @app.route('/', methods=['GET'])
 def test():
     return Response('It works!')
