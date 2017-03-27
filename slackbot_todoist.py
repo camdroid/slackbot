@@ -1,6 +1,6 @@
 import todoist
 from secrets import TODOIST_API_KEY
-from config import todoist_inbox_id
+from secrets import todoist_inbox_id
 
 
 
@@ -22,6 +22,9 @@ class Todoist(object):
         return items[:20]
 
     def parse_commands(self, commands):
+        if not commands:
+            print('Command not found')
+            return
         if commands[0] == 'list':
             items = self.list()
             msgs = [item['content'] for item in items]

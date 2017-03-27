@@ -40,8 +40,7 @@ def handle_command(command, channel):
     commands = [c.lower() for c in command.split(' ')]
     if commands[0] == 'todo':
         todo = Todoist()
-        results = todo.parse_commands(commands[1:])
-        message = todo.format_list(results)
+        message = todo.parse_commands(commands[1:])
     slack_client.api_call('chat.postMessage', channel=channel,
                           text=message, as_user=True)
 
@@ -52,6 +51,8 @@ def main():
         print('{} is up and running!'.format(BOT_NAME))
         while True:
             command, channel = parse_slack_output(slack_client.rtm_read())
+            if command or channel:
+                print('Received from {}: {}'.format(channel, command))
             if command and channel:
                 handle_command(command, channel)
             time.sleep(READ_WEBSOCKET_DELAY)
