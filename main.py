@@ -7,10 +7,9 @@ from slackbot_todoist import Todoist
 
 
 BOT_NAME = 'test_bot'
-BOT_ID = 'U2Z5U89FT'
+BOT_ID = 'U31R7Q58A'
 slack_client = SlackClient(SLACKBOT_TOKEN)
 AT_BOT = '<@' + BOT_ID +'>'
-BOT_CHANNEL = 'D2ZRPJTMY'
 
 
 def print_user_ids():
